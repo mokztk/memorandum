@@ -1,0 +1,22 @@
+project:
+  type: website
+  output-dir: ../docs/
+
+website:
+  title: "memoRandum"
+  navbar:
+    background: dark  
+    left:
+      - href: index.qmd
+        text: Home
+      - about.qmd
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+    keep-md: true
+
+
+
