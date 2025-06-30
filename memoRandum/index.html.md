@@ -1,11 +1,26 @@
 ---
 title: "memoRandum"
+lang: ja
 listing: 
-  contents: memoRandum
+  id: listings
   exclude:
     filename: "about.qmd"
-  type: default
+  type: grid
+  date-format: long
   sort: "date desc"
-  categories: true
-  fields: [title, date, description, categolies]
+  categories: numbered
+  fields: 
+    - title
+    - date
+    - description
+    - categories
 ---
+
+
+
+
+
+-----
+
+:::::{.listings}
+:::::

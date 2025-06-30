@@ -1,4 +1,6 @@
 {
   "listing": "/index.html",
-  "items": []
+  "items": [
+    "/setting_cran_mirror.html"
+  ]
 }
