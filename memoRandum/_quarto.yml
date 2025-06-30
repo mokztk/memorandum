@@ -5,15 +5,20 @@ project:
 website:
   title: "memoRandum"
   navbar:
-    background: dark  
+    background: primary
     left:
       - href: index.qmd
         text: Home
-      - about.qmd
+      - href: about.qmd
+        text: About
+    right: 
+      - href: https://github.com/mokztk/zenn_articles/
+        icon: github
 
 format:
   html:
-    theme: cosmo
+    theme: sandstone
+    linkcolor: "#a463f2"
     css: styles.css
     toc: true
     keep-md: true

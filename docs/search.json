@@ -4,13 +4,20 @@
     "href": "index.html",
     "title": "memoRandum",
     "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
+    "text": "nothing yet …"
+  },
+  {
+    "objectID": "index.html#記事一覧新しい順",
+    "href": "index.html#記事一覧新しい順",
+    "title": "memoRandum",
+    "section": "",
+    "text": "nothing yet …"
   },
   {
     "objectID": "about.html",
     "href": "about.html",
-    "title": "About",
+    "title": "About this site",
     "section": "",
-    "text": "About this site"
+    "text": "R を中心とする個人的なメモです。\nZenn の原稿その他をストックしています。"
   }
 ]
