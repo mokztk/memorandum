@@ -1,11 +1,11 @@
 ---
 title: "memoRandum"
+listing: 
+  contents: memoRandum
+  exclude:
+    filename: "about.qmd"
+  type: default
+  sort: "date desc"
+  categories: true
+  fields: [title, date, description, categolies]
 ---
-
-
-
-
-
-## 記事一覧（新しい順）
-
-nothing yet ...
