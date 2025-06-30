@@ -1,0 +1,72 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "memoRandum",
+    "section": "",
+    "text": "CRAN mirror の設定\n\n\n\nR\n\n\n設定\n\n\n\n\n\n\n\n2025年6月30日\n\n\n\n\n\n\n\n\n一致なし"
+  },
+  {
+    "objectID": "index.html#記事一覧新しい順",
+    "href": "index.html#記事一覧新しい順",
+    "title": "memoRandum",
+    "section": "",
+    "text": "nothing yet …"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About this site",
+    "section": "",
+    "text": "R を中心とする個人的なメモです。\nZenn の原稿その他をストックしています。"
+  },
+  {
+    "objectID": "setting_cran_mirror.html",
+    "href": "setting_cran_mirror.html",
+    "title": "CRAN mirror の設定",
+    "section": "",
+    "text": "昨年から参加しているオンラインスクール mJOHNSNOW の R に関する Slack チャットで CRAN mirror の設定に起因するトラブルをよく見るので、設定方法を確認します。"
+  },
+  {
+    "objectID": "setting_cran_mirror.html#abstract",
+    "href": "setting_cran_mirror.html#abstract",
+    "title": "CRAN mirror の設定",
+    "section": "Abstract",
+    "text": "Abstract\n\nR の各種パッケージを入手するための CRAN (The Comprehensive R Archive Network) ミラーサイトは、特別な事情がなければ次のどちらかで問題ありません。\n\nhttps://cloud.r-project.org （標準）\nhttps://cran.rstudio.com\n\n旧版の R を使用するなどで、特定の時点のバッケージを使用したい場合は Posit Package Manager のスナップショットが有効です。"
+  },
+  {
+    "objectID": "setting_cran_mirror.html#問題の概要",
+    "href": "setting_cran_mirror.html#問題の概要",
+    "title": "CRAN mirror の設定",
+    "section": "問題の概要",
+    "text": "問題の概要\nmJOHNSNOW はパブリックヘルスがテーマのオンラインスクールで、R を使った講義も多く行われています。Slack のチャットでよく見かけるトラブルで、\n警告: failed to find binary for 'MASS 7.3-60.2' in package repositories\n警告: failed to find source for 'MASS 7.3-60.2' in package repositories\n警告: error downloading 'https://cran.ism.ac.jp//src/contrib/Archive/MASS/MASS_7.3-60.2.tar.gz' [error code 22]\n警告: error downloading 'https://cran.ism.ac.jp//src/contrib/Archive/MASS/MASS_7.3-60.2.tar.gz' [error code 22]\nエラー: failed to retrieve package 'MASS@7.3-60.2'\nなどのメッセージが出てパッケージのインストールができない、というものがあります。\nR では、本体に加えてパッケージという形にまとめられた各種の処理（関数）やデータが CRAN (The Comprehensive R Archive Network) というサイトを通じて配布されています。本家 cran.r-project.org へのアクセス集中による負荷を減らすため、各国に本家のコピー（ミラーサイト）が設置・運営されてきました。\nこの問題は、統計数理研究所で長らく運営されてきて、少し古い資料でミラーサイトの設定によく勧められていた cran.ism.ac.jp というサーバーが 2024年6月で運用終了となって既に存在していない ことによります。"
+  },
+  {
+    "objectID": "setting_cran_mirror.html#歴史的経緯",
+    "href": "setting_cran_mirror.html#歴史的経緯",
+    "title": "CRAN mirror の設定",
+    "section": "歴史的経緯",
+    "text": "歴史的経緯\nR では、本体に加えてパッケージという形にまとめられた各種の処理（関数）やデータが CRAN (The Comprehensive R Archive Network) というサイトを通じて配布されています。本家 cran.r-project.org へのアクセス集中による負荷を減らすため、各国に本家のコピー（ミラーサイト）が設置・運営されてきました。\n日本では、\n\n統計数理研究所\n東京大学\n北陸先端科学技術大学院大学\n山形大学\n\nなどが運営されていましたが、現在残っているのは山形大学 https://ftp.yz.yamagata-u.ac.jp/pub/cran/ だけです。\n現在は、後述のようにクラウドベースのミラーサイトを使用することが推奨されていますが、以前は近く（地理的、あるいはネットワーク的に）のミラーサイトを使用することがすすめ"
+  },
+  {
+    "objectID": "setting_cran_mirror.html#対策",
+    "href": "setting_cran_mirror.html#対策",
+    "title": "CRAN mirror の設定",
+    "section": "対策",
+    "text": "対策\n\nCDNを用いたクラウドベースのミラーサーバー\n2017年頃から、CDN (Contents Delivery Network) の仕組みで高速にアクセスできるクラウドベースのミラーサーバーが登場し、そちらを使用することが勧められています。\n\nR projct 標準の cloud.r-project.org\nPosit（旧 RStudio）社が運営する cran.rstudio.com\n\nの2つが現在利用できます。\n\n\nスナップショット\n現在進行中のプロジェクトの都合などで、R 本体や解析用パッケージのバージョンを更新したくない場面もあります。そのような場合には、特定の時点の CRAN の内容を保持している「スナップショット」サービスが有効です。\nPosit Package Manager を使った設定については稿を改めます。"
+  },
+  {
+    "objectID": "setting_cran_mirror.html#実際の使い方",
+    "href": "setting_cran_mirror.html#実際の使い方",
+    "title": "CRAN mirror の設定",
+    "section": "実際の使い方",
+    "text": "実際の使い方\n\n一時的にインストール元を指定する場合\ninstall.packages() のオプション repos = に直接インストール元を指定することができます。\n\ninstall.packages(\"MASS\", repos = \"cloud.r-project.org\")\n\n\n\n継続的にインストール元を変更する場合\nRStudio では、Tools - Global Options… - Packages - Primary CRAN Repository で設定を変更することができます。 ただし、この設定は RStudio 上でのみ反映されます。\n\n\n\nRStudio setting\n\n\nRStudio 以外でも有効にするためには、.Rprofile というファイルに以下のような記載をします。\n.Rprofile の場所は R のコンソールで Sys.getenv(\"R_USER\") を実行して表示されたフォルダ（ディレクトリ）です。最近の Windows では、“C:/Users/*****/OneDrive/ドキュメント” のような OneDrive 上にあるかもしれません。ファイルがなければ、新しく作る必要があります。\n\noptions(repos = c(CRAN = \"https://cloud.r-project.org\"))"
+  },
+  {
+    "objectID": "setting_cran_mirror.html#要旨",
+    "href": "setting_cran_mirror.html#要旨",
+    "title": "CRAN mirror の設定",
+    "section": "要旨",
+    "text": "要旨\n\n以前よく使われていた統計数理研究所 cran.ism.ac.jp は運用終了となり使用できません。\nR の各種パッケージを入手するための CRAN (The Comprehensive R Archive Network) ミラーサイトは、特別な事情がなければ次のどちらかで問題ありません。\n\nhttps://cloud.r-project.org （標準）\nhttps://cran.rstudio.com\n\n継続的に CRAN ミラーサイトの設定を変更するには、RStudio の設定画面または .Rprofile ファイルでの設定が必要です。"
+  }
+]

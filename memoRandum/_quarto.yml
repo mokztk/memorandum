@@ -1,0 +1,24 @@
+project:
+  type: website
+  output-dir: ../docs/
+
+website:
+  title: "memoRandum"
+  navbar:
+    background: primary
+    left:
+      - href: index.qmd
+        text: Home
+      - href: about.qmd
+        text: About
+    right: 
+      - href: https://github.com/mokztk/zenn_articles/
+        icon: github
+
+format:
+  html:
+    theme: sandstone
+    linkcolor: "#a463f2"
+    css: styles.css
+    toc: true
+    keep-md: true
