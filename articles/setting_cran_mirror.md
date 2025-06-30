@@ -1,0 +1,79 @@
+---
+title: "CRAN mirror の設定"
+emoji: "🪞"
+type: "tech"
+topics: ["R", "設定"]
+published: true
+---
+
+昨年から参加しているオンラインスクール [mJOHNSNOW](https://mmedici.co.jp/mjohnsnow) の R に関する Slack チャットで CRAN mirror の設定に起因するトラブルをよく見るので、設定方法を確認します。
+
+## 要旨
+
+- 以前よく使われていた統計数理研究所 cran.ism.ac.jp は運用終了となり使用できません。
+- R の各種パッケージを入手するための CRAN (The Comprehensive R Archive Network) ミラーサイトは、特別な事情がなければ次のどちらかで問題ありません。
+    - https://cloud.r-project.org （標準）
+    - https://cran.rstudio.com
+- 継続的に CRAN ミラーサイトの設定を変更するには、RStudio の設定画面または `.Rprofile` ファイルでの設定が必要です。
+
+## 問題の概要
+
+[mJOHNSNOW](https://mmedici.co.jp/mjohnsnow) はパブリックヘルスがテーマのオンラインスクールで、R を使った講義も多く行われています。Slack のチャットでよく見かけるトラブルで、
+
+```
+警告: failed to find binary for 'MASS 7.3-60.2' in package repositories
+警告: failed to find source for 'MASS 7.3-60.2' in package repositories
+警告: error downloading 'https://cran.ism.ac.jp//src/contrib/Archive/MASS/MASS_7.3-60.2.tar.gz' [error code 22]
+警告: error downloading 'https://cran.ism.ac.jp//src/contrib/Archive/MASS/MASS_7.3-60.2.tar.gz' [error code 22]
+エラー: failed to retrieve package 'MASS@7.3-60.2'
+```
+
+などのメッセージが出てパッケージのインストールができない、というものがあります。
+
+R では、本体に加えてパッケージという形にまとめられた各種の処理（関数）やデータが CRAN (The Comprehensive R Archive Network) というサイトを通じて配布されています。本家 cran.r-project.org へのアクセス集中による負荷を減らすため、各国に本家のコピー（ミラーサイト）が設置・運営されてきました。
+
+この問題は、統計数理研究所で長らく運営されてきて、**少し古い資料でミラーサイトの設定によく勧められていた cran.ism.ac.jp というサーバーが 2024年6月で運用終了となって既に存在していない** ことによります。
+
+## 対策
+
+### CDNを用いたクラウドベースのミラーサーバー
+
+2017年頃から、CDN (Contents Delivery Network) の仕組みで高速にアクセスできるクラウドベースのミラーサーバーが登場し、そちらを使用することが勧められています。
+
+- R projct 標準の cloud.r-project.org
+- Posit（旧 RStudio）社が運営する cran.rstudio.com
+
+の2つが現在利用できます。
+
+### スナップショット
+
+現在進行中のプロジェクトの都合などで、R 本体や解析用パッケージのバージョンを更新したくない場面もあります。そのような場合には、特定の時点の CRAN の内容を保持している「スナップショット」サービスが有効です。
+
+Posit Package Manager を使った設定については稿を改めます。
+
+## 実際の使い方
+
+### 一時的にインストール元を指定する場合
+
+`install.packages()` のオプション `repos =` に直接インストール元を指定することができます。
+
+```r
+install.packages("MASS", repos = "cloud.r-project.org")
+```
+
+
+### 継続的にインストール元を変更する場合
+
+RStudio では、**Tools - Global Options... - Packages - Primary CRAN Repository** で設定を変更することができます。
+ただし、この設定は RStudio 上でのみ反映されます。
+
+![RStudio setting](/images/setting_cran_mirror-1.png)
+
+RStudio 以外でも有効にするためには、`.Rprofile` というファイルに以下のような記載をします。
+
+`.Rprofile` の場所は R のコンソールで `Sys.getenv("R_USER")` を実行して表示されたフォルダ（ディレクトリ）です。最近の Windows では、"C:/Users/*****/OneDrive/ドキュメント" のような OneDrive 上にあるかもしれません。ファイルがなければ、新しく作る必要があります。
+
+
+```r:.Rprofle
+options(repos = c(CRAN = "https://cloud.r-project.org"))
+```
