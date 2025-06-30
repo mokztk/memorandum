@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/install_old_packages.html",
       "/setting_cran_mirror.html"
     ]
   }

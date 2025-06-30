@@ -16,10 +16,6 @@ listing:
     - categories
 ---
 
-
-
-
-
 -----
 
 :::::{.listings}

@@ -60,9 +60,10 @@ https://cran.r-project.org/doc/manuals/r-patched/R-admin.html#Installing-package
 
 まず、`pak::pkg_history()` を使って `Matrix` のこれまでのリリース情報から要求される R のバージョンを見てみます。
 
-```{r}
-#| message: false
 
+::: {.cell}
+
+```{.r .cell-code}
 # pacman がなければインストール
 if (!("pacman" %in% .packages(all.available = TRUE))) {
   install.packages("pacman")
@@ -84,6 +85,27 @@ pkg_history(pkg = "Matrix") %>%
   head(10) 
 ```
 
+::: {.cell-output-display}
+<div class="kable-table">
+
+|Package |Version |Date       |R dependency |
+|:-------|:-------|:----------|:------------|
+|Matrix  |1.7-3   |2025-03-05 |>= 4.4       |
+|Matrix  |1.7-2   |2025-01-20 |>= 4.4       |
+|Matrix  |1.7-1   |2024-10-17 |>= 4.4.0     |
+|Matrix  |1.7-0   |2024-03-16 |>= 4.4.0     |
+|Matrix  |1.6-5   |2024-01-06 |>= 3.5.0     |
+|Matrix  |1.6-4   |2023-11-29 |>= 3.5.0     |
+|Matrix  |1.6-3   |2023-11-13 |>= 3.5.0     |
+|Matrix  |1.6-2   |2023-11-03 |>= 3.5.0     |
+|Matrix  |1.6-1.1 |2023-09-08 |>= 3.5.0     |
+|Matrix  |1.6-1   |2023-08-11 |>= 3.5.0     |
+
+</div>
+:::
+:::
+
+
 **バージョン 1.6-5 （2024-01-06 公開）ならば、R 4.3系でも使用できそうです。**
 
 ## 対策
@@ -100,17 +122,25 @@ CRAN (The Comprehensive R Archive Network) からは過去のバージョンの�
 
 上記より、`Matrix_1.6-5.zip` (Windows) または `Matrix_1.6-5.tgz` (macOS) を working directory にダウンロードして
 
-```{r}
-#| eval: false
+
+::: {.cell}
+
+```{.r .cell-code}
 install.packages("Matrix_1.6-5.zip", repos = NULL)
 ```
+:::
+
 
 とするか、上記アーカイブのアドレスを使って
 
-```{r}
-#| eval: false
+
+::: {.cell}
+
+```{.r .cell-code}
 install.packages("https://cloud.r-project.org/bin/windows/contrib/4.3/Matrix_1.6-5.zip", repos = NULL)
 ```
+:::
+
 
 とすることでインストールが可能です。`repos = NULL` は省略しても補完されますが、明示的に指定したほうが確実です。
 
@@ -118,11 +148,15 @@ install.packages("https://cloud.r-project.org/bin/windows/contrib/4.3/Matrix_1.6
 
 上記のアーカイブには、対象の R のバージョンにより存在しないパッケージのバージョンもあります。`remotes::install_version()` のようにバージョンを指定してインストールできる命令を使用すると、もう少し柔軟なインストールが可能です。
 
-```{r}
-#| eval: false
+
+::: {.cell}
+
+```{.r .cell-code}
 # repos は最新の CRAN を指定するほうが良い
 remotes::install_version(package = "Matrix", version = "1.6-5", repos = "cloud.r-project.org")
 ```
+:::
+
 
 ### Posit Package Manager のスナップショットからインストール
 
@@ -143,10 +177,14 @@ Posit（旧 RStudio）社が運営する、日々の CRAN ライブラリーの�
 
 この URL を `install.packages()` の `repos =` に指定することで、**関連パッケージを含めて  `Matrix 1.6-5` が最新バージョンであった 2024-03-15 時点のバージョンに揃えてインストールできる**ようになります。
 
-```{r}
-#| eval: false
+
+::: {.cell}
+
+```{.r .cell-code}
 install.packages("Matrix", repos = "https://packagemanager.posit.co/cran/2024-03-15")
 ```
+:::
+
 
 ## pak パッケージの活用
 
@@ -154,17 +192,23 @@ install.packages("Matrix", repos = "https://packagemanager.posit.co/cran/2024-03
 
 基本的な使い方は
 
-```{r}
-#| eval: false
+
+::: {.cell}
+
+```{.r .cell-code}
 # package_name をインストールする（どちらを使っても良い）
 pak::pak("package_name")
 pak::pkg_install("package_name")
 ```
+:::
+
 
 で、`package_name` の部分の書き方により CRAN 以外のサイトや最新版以外のバージョンをインストールすることも可能です。
 
-```{r}
-#| eval: false
+
+::: {.cell}
+
+```{.r .cell-code}
 # GitHub にある dplyr の最新開発版をインストールする
 pak::pak("tidyverse/dplyr")
 
@@ -174,26 +218,39 @@ pak::pak("Matrix@1.6-5")
 # ダウンロードしたファイルからインストール
 pak::pak("local::Matrix_1.6-5.zip")
 ```
+:::
+
 
 インストール元（レポジトリ）を検索、設定することもできます。
 
-```{r}
-#| collapse: true
 
+::: {.cell}
+
+```{.r .cell-code}
 # R 4.4.0 がリリースされた翌日の Posit Package Manager
 # 実行中の OS に応じた URL が返される
 pak::repo_resolve("PPM@R-4.4.0")
+##                                              CRAN 
+## "https://packagemanager.posit.co/cran/2024-04-25"
 
 # survminer 0.5.0 がリリースされた翌日の Posit Package Manager
 # Matrix は 1.x-y 形式でハイフンが入るためうまくいかない
 pak::repo_resolve("PPM@survminer-0.5.0")
+##                                              CRAN 
+## "https://packagemanager.posit.co/cran/2024-10-31"
 
 # 特定の日付の Posit Package Manager
 pak::repo_resolve("PPM@2024-03-15")
+##                                              CRAN 
+## "https://packagemanager.posit.co/cran/2024-03-15"
 ```
+:::
 
-```{r}
-#| eval: false
+
+
+::: {.cell}
+
+```{.r .cell-code}
 # インストール元を Posit Package Manager で指定
 install.packages("Matrix", repos = pak::repo_resolve("PPM@R-4.4.0"))
 
@@ -212,6 +269,8 @@ pak::repo_get()
 ## 6 BioCworkflows https://bioconductor.org/packages/3.20/workflows       bioc     4.4.3     3.20        
 ## 7 BioCbooks     https://bioconductor.org/packages/3.20/books           bioc     4.4.3     3.20      
 ```
+:::
+
 
 
 
