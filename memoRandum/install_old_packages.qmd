@@ -1,0 +1,48 @@
+---
+title: "旧版の R にパッケージをインストールする"
+author: "@mokztk"
+date-format: iso
+date: "2025-06-30"
+format:
+  html: 
+    fontsize: normal
+    page-layout: full
+    toc: true
+    toc-depth: 2
+    html-math-method: katex
+    fig-format: svg
+    fig-height: 5
+    fig-width: 9
+    self-contained: true
+    number-sections: false
+    code-fold: false
+    code-block-border-left: true
+    code-line-numbers: false
+    code-overflow: wrap
+    highlight-style: atom-one
+    df-print: tibble
+categories:
+  - R
+  - 設定
+---
+
+パッケージを追加しようとしたとき、新しいバージョンの R を求められることがあります。R 本体の更新ができないとき、パッケージの最新版でなくともよい場合の回避策のメモです。
+
+## 要旨
+
+R のパッケージを追加しようとしたとき、新しいバージョンの R が必要になった場合の回避策として、
+
+- CRAN のアーカイブから .zip, .tar.gz 等のファイルをダウンロードまたは直接指定してインストール
+- `remotes::install_version()` や `pak::pkg_install()` のようなバージョンを指定できるパッケージ導入方法を使う
+- 使用中の R 本体に合わせて、インストール元を過去の CRAN スナップショット（Posit Package Manager）にする
+
+個人的なおすすめは、パッケージのバージョン指定も Posit Package Manager からのインストールも対応できる `pak` パッケージです。
+
+## 問題の概要
+
+生存期間分析、生存曲線の作図など医療統計でよく用いられる R のパッケージに `survminer` があります。[mJOHNSNOW](https://mmedici.co.jp/mjohnsnow) の R 解析セミナーで `survminer` 導入時にうまくいかない事例が多発し
+
+
+
+
+
