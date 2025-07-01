@@ -7,8 +7,8 @@ website:
   navbar:
     background: primary
     left:
-      - href: index.qmd
-        text: Home
+      - href: index.html#category=R
+        text: R
       - href: about.qmd
         text: About
     right: 

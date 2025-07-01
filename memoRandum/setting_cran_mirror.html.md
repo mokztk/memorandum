@@ -24,7 +24,9 @@ format:
 categories:
   - R
   - 設定
+  - mJOHNSNOW
 ---
+
 
 
 
@@ -82,12 +84,14 @@ Posit Package Manager を使った設定については稿を改めます。
 
 
 
+
 ::: {.cell}
 
 ```{.r .cell-code}
 install.packages("MASS", repos = "cloud.r-project.org")
 ```
 :::
+
 
 
 
@@ -101,6 +105,7 @@ RStudio では、**Tools - Global Options... - Packages - Primary CRAN Repositor
 RStudio 以外でも有効にするためには、`.Rprofile` というファイルに以下のような記載をします。
 
 `.Rprofile` の場所は R のコンソールで `Sys.getenv("R_USER")` を実行して表示されたフォルダ（ディレクトリ）です。最近の Windows では、"C:/Users/*****/OneDrive/ドキュメント" のような OneDrive 上にあるかもしれません。ファイルがなければ、新しく作る必要があります。
+
 
 
 
