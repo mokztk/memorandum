@@ -33,7 +33,7 @@ categories:
 
 R のパッケージを追加しようとしたとき、新しいバージョンの R が必要になった場合の回避策として、
 
-- CRAN のアーカイブから .zip, .tar.gz 等のファイルをダウンロードまたは直接指定してインストール
+- CRAN (The Comprehensive R Archive Network) のアーカイブから .zip, .tgz 等のファイルをダウンロードまたは直接指定してインストール
 - `remotes::install_version()` や `pak::pkg_install()` のようなバージョンを指定できるパッケージ導入方法を使う
 - 使用中の R 本体に合わせて、インストール元を過去の CRAN スナップショット（Posit Package Manager）にする
 
@@ -90,7 +90,7 @@ pkg_history(pkg = "Matrix") %>%
 
 ### CRAN のアーカイブからインストール
 
-CRAN (The Comprehensive R Archive Network) からは過去のバージョンのパッケージも .zip 形式や .tar.gz (.tgz) 形式で入手することができます。OS、R のバージョン別になっているので適切なものを探す必要があるほか、関連（依存）パッケージがある場合はうまくいかない可能性があります。
+CRAN からは過去のバージョンのパッケージも .zip 形式や .tar.gz (.tgz) 形式で入手することができます。OS、R のバージョン別になっているので適切なものを探す必要があるほか、関連（依存）パッケージがある場合はうまくいかない可能性があります。
 
 例えば、R 4.3向けのパッケージでは
 
@@ -127,7 +127,7 @@ remotes::install_version(package = "Matrix", version = "1.6-5", repos = "cloud.r
 ### Posit Package Manager のスナップショットからインストール
 
 Posit（旧 RStudio）社が運営する、日々の CRAN ライブラリーの内容が保管されているサイトです。
-かつて Microsoft が運営していた同様のサイト MRAN （The Microsoft R Application Network) はソースコードの配布のみでしたが、Posit Package Manager は主要な OS (Windows, macOS, Linux) のバイナリパッケージが配布されているため、インストールも高速です。
+かつて Microsoft が運営していた同様のサイト MRAN (The Microsoft R Application Network) はソースコードの配布のみでしたが、Posit Package Manager は主要な OS (Windows, macOS, Linux) のバイナリパッケージが配布されているため、インストールも高速です。
 
 ![PPM setting 1](../images/setting_ppm-1.png)
 
@@ -156,6 +156,11 @@ install.packages("Matrix", repos = "https://packagemanager.posit.co/cran/2024-03
 
 ```{r}
 #| eval: false
+# pak がなければ最新版をインストール
+if (!("pak" %in% .packages(all.available = TRUE))) {
+  install.packages("pak", repos = "cloud.r-project.org")
+}
+
 # package_name をインストールする（どちらを使っても良い）
 pak::pak("package_name")
 pak::pkg_install("package_name")
@@ -165,10 +170,13 @@ pak::pkg_install("package_name")
 
 ```{r}
 #| eval: false
+# 通常（CRAN にある最新版をインストール）
+pak::pak("dplyr")
+
 # GitHub にある dplyr の最新開発版をインストールする
 pak::pak("tidyverse/dplyr")
 
-# `Matrix 1.6-5` をインストールする
+# バージョンを指定して `Matrix 1.6-5` をインストールする
 pak::pak("Matrix@1.6-5")
 
 # ダウンロードしたファイルからインストール
@@ -180,7 +188,7 @@ pak::pak("local::Matrix_1.6-5.zip")
 ```{r}
 #| collapse: true
 
-# R 4.4.0 がリリースされた翌日の Posit Package Manager
+# R 4.4.0 がリリースされた翌日（≒ R 4.3.3 環境から主流が切り替わる直前）の Posit Package Manager
 # 実行中の OS に応じた URL が返される
 pak::repo_resolve("PPM@R-4.4.0")
 
@@ -201,16 +209,15 @@ install.packages("Matrix", repos = pak::repo_resolve("PPM@R-4.4.0"))
 pak::repo_add(CRAN = pak::repo_resolve("PPM@R-4.4.0"))
 pak::repo_get()
 
-## # A data frame: 7 × 5
+## # A data frame: 6 × 5
 ##   name          url                                                    type     r_version bioc_version
 ## * <chr>         <chr>                                                  <chr>    <chr>     <chr>       
-## 1 P3M           https://packagemanager.posit.co/cran/latest            cranlike *         NA          
-## 2 CRAN          https://packagemanager.posit.co/cran/2024-04-25        cran     *         NA          
-## 3 BioCsoft      https://bioconductor.org/packages/3.20/bioc            bioc     4.4.3     3.20        
-## 4 BioCann       https://bioconductor.org/packages/3.20/data/annotation bioc     4.4.3     3.20        
-## 5 BioCexp       https://bioconductor.org/packages/3.20/data/experiment bioc     4.4.3     3.20        
-## 6 BioCworkflows https://bioconductor.org/packages/3.20/workflows       bioc     4.4.3     3.20        
-## 7 BioCbooks     https://bioconductor.org/packages/3.20/books           bioc     4.4.3     3.20      
+## 1 CRAN          https://packagemanager.posit.co/cran/2024-04-25        cran     *         NA          
+## 2 BioCsoft      https://bioconductor.org/packages/3.20/bioc            bioc     4.4.3     3.20        
+## 3 BioCann       https://bioconductor.org/packages/3.20/data/annotation bioc     4.4.3     3.20        
+## 4 BioCexp       https://bioconductor.org/packages/3.20/data/experiment bioc     4.4.3     3.20        
+## 5 BioCworkflows https://bioconductor.org/packages/3.20/workflows       bioc     4.4.3     3.20        
+## 6 BioCbooks     https://bioconductor.org/packages/3.20/books           bioc     4.4.3     3.20      
 ```
 
 
