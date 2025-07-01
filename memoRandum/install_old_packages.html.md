@@ -30,7 +30,6 @@ categories:
 
 
 
-
 パッケージを追加しようとしたとき、新しいバージョンの R を求められることがあります。R 本体の更新ができないとき、パッケージの最新版でなくともよい場合の回避策のメモです。
 
 ## 要旨
@@ -63,7 +62,6 @@ https://cran.r-project.org/doc/manuals/r-patched/R-admin.html#Installing-package
 他にも特定の R バージョンを要求するものがありましたが、ここでは `Matrix` を例に進めます。
 
 まず、`pak::pkg_history()` を使って `Matrix` のこれまでのリリース情報から要求される R のバージョンを見てみます。
-
 
 
 
@@ -113,7 +111,6 @@ pkg_history(pkg = "Matrix") %>%
 
 
 
-
 **バージョン 1.6-5 （2024-01-06 公開）ならば、R 4.3系でも使用できそうです。**
 
 ## 対策
@@ -132,7 +129,6 @@ CRAN からは過去のバージョンのパッケージも .zip 形式や .tar.
 
 
 
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -142,9 +138,7 @@ install.packages("Matrix_1.6-5.zip", repos = NULL)
 
 
 
-
 とするか、上記アーカイブのアドレスを使って
-
 
 
 
@@ -157,13 +151,11 @@ install.packages("https://cloud.r-project.org/bin/windows/contrib/4.3/Matrix_1.6
 
 
 
-
 とすることでインストールが可能です。`repos = NULL` は省略しても補完されますが、明示的に指定したほうが確実です。
 
 ### パッケージのバージョンを指定してインストール
 
 上記のアーカイブには、対象の R のバージョンにより存在しないパッケージのバージョンもあります。`remotes::install_version()` のようにバージョンを指定してインストールできる命令を使用すると、もう少し柔軟なインストールが可能です。
-
 
 
 
@@ -174,7 +166,6 @@ install.packages("https://cloud.r-project.org/bin/windows/contrib/4.3/Matrix_1.6
 remotes::install_version(package = "Matrix", version = "1.6-5", repos = "cloud.r-project.org")
 ```
 :::
-
 
 
 
@@ -199,7 +190,6 @@ Posit（旧 RStudio）社が運営する、日々の CRAN ライブラリーの�
 
 
 
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -209,13 +199,11 @@ install.packages("Matrix", repos = "https://packagemanager.posit.co/cran/2024-03
 
 
 
-
 ## pak パッケージの活用
 
 `pak` は CRAN だけでなく、GitHub や BioConductor といった別のサイトで配布されているパッケージや、ダウンロードしたファイルからも同じ命令でパッケージのインストールができる多機能なパッケージです。
 
 基本的な使い方は
-
 
 
 
@@ -235,9 +223,7 @@ pak::pkg_install("package_name")
 
 
 
-
 で、`package_name` の部分の書き方により CRAN 以外のサイトや最新版以外のバージョンをインストールすることも可能です。
-
 
 
 
@@ -260,9 +246,7 @@ pak::pak("local::Matrix_1.6-5.zip")
 
 
 
-
 インストール元（レポジトリ）を検索、設定することもできます。
-
 
 
 
@@ -285,12 +269,8 @@ pak::repo_resolve("PPM@survminer-0.5.0")
 pak::repo_resolve("PPM@2024-03-15")
 ##                                              CRAN 
 ## "https://packagemanager.posit.co/cran/2024-03-15"
-```
-:::
 
-::: {.cell}
 
-```{.r .cell-code}
 # インストール元を Posit Package Manager で指定
 install.packages("Matrix", repos = pak::repo_resolve("PPM@R-4.4.0"))
 

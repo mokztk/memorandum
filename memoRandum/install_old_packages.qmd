@@ -186,22 +186,26 @@ pak::pak("local::Matrix_1.6-5.zip")
 インストール元（レポジトリ）を検索、設定することもできます。
 
 ```{r}
-#| collapse: true
+#| eval: false
 
 # R 4.4.0 がリリースされた翌日（≒ R 4.3.3 環境から主流が切り替わる直前）の Posit Package Manager
 # 実行中の OS に応じた URL が返される
 pak::repo_resolve("PPM@R-4.4.0")
+##                                              CRAN 
+## "https://packagemanager.posit.co/cran/2024-04-25"
 
 # survminer 0.5.0 がリリースされた翌日の Posit Package Manager
 # Matrix は 1.x-y 形式でハイフンが入るためうまくいかない
 pak::repo_resolve("PPM@survminer-0.5.0")
+##                                              CRAN 
+## "https://packagemanager.posit.co/cran/2024-10-31"
 
 # 特定の日付の Posit Package Manager
 pak::repo_resolve("PPM@2024-03-15")
-```
+##                                              CRAN 
+## "https://packagemanager.posit.co/cran/2024-03-15"
 
-```{r}
-#| eval: false
+
 # インストール元を Posit Package Manager で指定
 install.packages("Matrix", repos = pak::repo_resolve("PPM@R-4.4.0"))
 
@@ -219,9 +223,4 @@ pak::repo_get()
 ## 5 BioCworkflows https://bioconductor.org/packages/3.20/workflows       bioc     4.4.3     3.20        
 ## 6 BioCbooks     https://bioconductor.org/packages/3.20/books           bioc     4.4.3     3.20      
 ```
-
-
-
-
-
 
