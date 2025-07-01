@@ -174,18 +174,18 @@ pak::pak("local::Matrix_1.6-5.zip")
 # 実行中の OS に応じた URL が返される
 pak::repo_resolve("PPM@R-4.4.0")
 ##                                              CRAN 
-## "https://p3m.dev/cran/__linux__/noble/2024-04-25"
+## "https://packagemanager.posit.co/cran/2024-04-25"
 
 # survminer 0.5.0 がリリースされた翌日の Posit Package Manager
 # Matrix は 1.x-y 形式でハイフンが入るためうまくいかない
 pak::repo_resolve("PPM@survminer-0.5.0")
 ##                                              CRAN 
-## "https://p3m.dev/cran/__linux__/noble/2024-10-31"
+## "https://packagemanager.posit.co/cran/2024-10-31"
 
 # 特定の日付の Posit Package Manager
 pak::repo_resolve("PPM@2024-03-15")
 ##                                              CRAN 
-## "https://p3m.dev/cran/__linux__/noble/2024-03-15"
+## "https://packagemanager.posit.co/cran/2024-03-15"
 
 # インストール元を Posit Package Manager で指定
 install.packages("Matrix", repos = pak::repo_resolve("PPM@R-4.4.0"))

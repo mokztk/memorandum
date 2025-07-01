@@ -14,6 +14,10 @@ listing:
     - date
     - description
     - categories
+format: 
+  html: 
+    fontsize: normal
+    page-layout: full
 ---
 
 
