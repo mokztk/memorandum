@@ -41,6 +41,11 @@ pre:not(.sourceCode) code {
     border-radius: 4px;
 }
 
+/* 記事一覧の見出し */
+div.quarto-grid-item .card-title {
+  font-weight: bold;
+}
+
 /* 印刷用の設定 */
 @media print {
   /* タイトル部分の余白 */
