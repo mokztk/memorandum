@@ -37,9 +37,9 @@ Google Gemini によると、
 > この研究は、1975年から始まり、数十年にわたって継続的にデータが収集されてきました。これにより、長期間にわたるAMIの疫学的変化、医療進歩の影響、そして公衆衛生戦略の有効性を評価するための貴重なデータを提供しています。\
 > WHASデータセットは、患者がAMIで入院した後の生存期間（日数）を主要なアウトカム変数としており、データサイエンスや生存時間解析の演習で頻繁に用いられます。このデータは、単に個々の患者の予後を予測するだけでなく、地域レベルでの心臓病対策の改善にも貢献する情報源となっています。
 
-WHAS500 データセットはマサチューセッツ州立大学 UMass のサイトで 2017 年頃まで配布されていました [^2] が、現在は Fobbiden になっており直接入手することはできません（大本は Wiley の書籍 [^1] 関連ファイルとして同社 ftp サーバーで配布されていたもののようです）。筆者は過去に学習用にダウンロードしたファイルを所持していますが、これから練習用に使いたい方へ紹介できる方法を検討しました。
+WHAS500 データセットはマサチューセッツ州立大学 UMass のサイトで 2017 年頃まで配布されていました [^2] が、現在は Fobbiden になっており直接入手することはできません（大本は Wiley の書籍 [^1] 関連ファイルとして同社 ftp サーバーで配布されていたもののようです）。
 
-現在オンラインで入手可能な方法としては、
+筆者は過去に学習用にダウンロードしたファイルを所持していますが、これから練習用に使いたい方へ紹介できる方法を検討しました。現在オンラインで入手可能な方法としては、
 
 - R パッケージ `smoothHR`
     - `whas500` としてデータセットが添付されている
@@ -64,7 +64,7 @@ WHAS500 データセットはマサチューセッツ州立大学 UMass のサ�
 #| eval: false
 
 # Python 版
-# Gemini に作成してもらった Python コードをもとに reticulate で R に読み込む
+# Gemini に作成してもらった下記 Python コードをもとに reticulate で R に読み込む
 # -----------------------------------------------------------------------------------------------------------
 # import pandas as pd
 # from sksurv.datasets import load_whas500
@@ -83,7 +83,7 @@ WHAS500 データセットはマサチューセッツ州立大学 UMass のサ�
 # -----------------------------------------------------------------------------------------------------------
 
 # Python 環境に Pandas など頻用パッケージは導入済みとする
-pacman::p_load(reticulate)
+pacman::p_load("reticulate")
 reticulate::py_install("scikit-survival")
 
 pd   <- reticulate::import("pandas")
@@ -96,9 +96,11 @@ whas500_py <- pd$concat(list(whas[[1]], y), axis = 1)
 # SAS 版
 # UCLA OARC のサイトから whas500.sas7bdat を working directory にダウンロードしておく
 # そのままだと変数名が大文字なので R, Python 版に揃えて小文字に変換
+if (!("haven" %in% .packages(all.available = TRUE))) install.packages("haven")
 whas500_sas <- haven::read_sas("whas500.sas7bdat", .name_repair = tolower)
 
 # R 版は smoothHR パッケージの物をそのまま使う
+if (!("smoothHR" %in% .packages(all.available = TRUE))) install.packages("smoothHR")
 whas500_r <- smoothHR::whas500
 ```
 
@@ -125,11 +127,12 @@ tibble(name = paste0("whas500_", c("r", "py", "sas"))) %>%
 # 各データに含まれる変数とデータの型
 tibble(variables = names(whas500_r)) %>%
   mutate(
-    R      = sapply(whas500_r  , class)[match(variables, names(whas500_r))],
+    R      = sapply(whas500_r  , class),
+    # それぞれに存在するかチェック & R 版の順番に沿って並べ替える
     Python = sapply(whas500_py , class)[match(variables, names(whas500_py))],
     SAS    = sapply(whas500_sas, class)[match(variables, names(whas500_sas))]
   ) %>%
-  mutate(across(-variables, \(x) if_else(!is.na(x), x, "x")))
+  mutate(across(-variables, \(y) if_else(is.na(y), "x", y)))
 ```
 
 R 版（あるいは元データ）と比較して、Python 版や SAS 版では生の日付情報（入院日 `admitdate`, 退院日 `disdate`, 転帰日 `fdate`）が削除されています。後述のように、ここから計算される日数情報は別にありますので、昨今の個人情報保護の流れも踏まえて削除して取り扱った方が良さそうです。
@@ -174,10 +177,11 @@ whas500_plain <-
 whas500_modified <-
   whas500_plain %>%
   mutate(
+    # 名義変数化
     gender = if_else(gender == 0, "Male"      , "Female"),
     miord  = if_else(miord  == 0, "First"     , "Recurrent"),
     mitype = if_else(mitype == 0, "non-Q-wave", "Q-wave"),
-    # コホート開始年は順番あり (factor) にしておく
+    # コホート開始年は順序変数 (factor) にしておく
     year   = factor(year, labels = c("1997", "1999", "2001"))
   )
 ```
@@ -193,8 +197,8 @@ saveRDS(whas500_modified, file = "whas500_modified.RDS")
 
 # 読み込む際には任意のオブジェクト名をつけられる
 data_whas500 <- readRDS("whas500_modified.RDS")
-str(data_whas500)
 
+str(data_whas500)
 ## 'data.frame':	500 obs. of  18 variables:
 ##  $ id    : int  1 2 3 4 5 6 7 8 9 10 ...
 ##  $ gender: chr  "Male" "Male" "Female" "Male" ...
@@ -223,6 +227,7 @@ str(data_whas500)
 
 :::{.callout-note}
 ## ライセンスについて
+
 このページで配布している `whas500_plain.RDS`, `whas500_modified.RDS` は R パッケージ [smoothHR](https://cran.r-project.org/package=smoothHR) に含まれるデータセットを基にしており、[GNU GPL v3](https://www.gnu.org/licenses/gpl-3.0.html) ライセンスの下で再配布されています。
 :::
 
