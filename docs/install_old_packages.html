@@ -4742,72 +4742,7 @@ vertical-align: -.125em;
 }</script>
 
 
-<style type="text/css">
-
-section.level1 h1 {
-border-bottom: solid 5px #888;
-margin-top: 1em;
-}
-
-section.level2 h2 {
-border-bottom: solid 3px #ccc;
-}
-section.level2 div {
-margin-top: 1em;
-}
-
-span.header-section-number:after {
-content: ". ";
-}
-
-div.cell-output-stderr {
-margin-bottom: 0.5em;
-padding: 0.5em;
-border: dashed 1px #400;
-border-radius: 4px;
-}
-div.cell-output-stdout {
-margin-bottom: 0.5em;
-padding: 0.5em;
-border: solid 1px black;
-border-radius: 4px;
-}
-pre:not(.sourceCode) code {
-margin-bottom: 0.5em;
-padding: 0.5em;
-border: solid 1px #888;
-border-radius: 4px;
-}
-
-@media print {
-
-header#title-block-header {
-padding-left: 2em;
-padding-right: 2em;
-}
-
-thead {
-display: table-header-group;
-}
-
-a[href]:after {
-content: "";
-}
-
-details:has(summary) {
-display: none;
-margin-bottom: 0;
-}
-
-hr {
-border-top: solid #888 2px;
-}
-
-figure.figure svg {
-width: 100%;
-}
-}
-</style>
+<style type="text/css">section.level1 h1 {border-bottom: solid 5px #888;margin-top: 1em;}section.level2 h2 {border-bottom: solid 3px #ccc;}section.level2 div {margin-top: 1em;}span.header-section-number:after {content: ". ";}div.cell-output-stderr {margin-bottom: 0.5em;padding: 0.5em;border: dashed 1px #400;border-radius: 4px;}div.cell-output-stdout {margin-bottom: 0.5em;padding: 0.5em;border: solid 1px black;border-radius: 4px;}pre:not(.sourceCode) code {margin-bottom: 0.5em;padding: 0.5em;border: solid 1px #888;border-radius: 4px;}div.quarto-grid-item .card-title {font-weight: bold;}@media print {header#title-block-header {padding-left: 2em;padding-right: 2em;}thead {display: table-header-group;}a[href]:after {content: "";}details:has(summary) {display: none;margin-bottom: 0;}hr {border-top: solid #888 2px;}figure.figure svg {width: 100%;}}</style>
 </head>
 
 <body class="nav-fixed">
@@ -5136,25 +5071,25 @@ https://cran.r-project.org/doc/manuals/r-patched/R-admin.html#Installing-package
 <span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 特定の日付の Posit Package Manager</span></span>
 <span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>pak<span class="sc">::</span><span class="fu">repo_resolve</span>(<span class="st">&quot;PPM@2024-03-15&quot;</span>)</span>
 <span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="do">##                                              CRAN </span></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="do">## &quot;https://packagemanager.posit.co/cran/2024-03-15&quot;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># インストール元を Posit Package Manager で指定</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;Matrix&quot;</span>, <span class="at">repos =</span> pak<span class="sc">::</span><span class="fu">repo_resolve</span>(<span class="st">&quot;PPM@R-4.4.0&quot;</span>))</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 継続的に変更する場合（R を終了するまで有効）</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>pak<span class="sc">::</span><span class="fu">repo_add</span>(<span class="at">CRAN =</span> pak<span class="sc">::</span><span class="fu">repo_resolve</span>(<span class="st">&quot;PPM@R-4.4.0&quot;</span>))</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>pak<span class="sc">::</span><span class="fu">repo_get</span>()</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="do">## # A data frame: 6 × 5</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="do">##   name          url                                                    type     r_version bioc_version</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="do">## * &lt;chr&gt;         &lt;chr&gt;                                                  &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;       </span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 CRAN          https://packagemanager.posit.co/cran/2024-04-25        cran     *         NA          </span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 BioCsoft      https://bioconductor.org/packages/3.20/bioc            bioc     4.4.3     3.20        </span></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 BioCann       https://bioconductor.org/packages/3.20/data/annotation bioc     4.4.3     3.20        </span></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="do">## 4 BioCexp       https://bioconductor.org/packages/3.20/data/experiment bioc     4.4.3     3.20        </span></span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="do">## 5 BioCworkflows https://bioconductor.org/packages/3.20/workflows       bioc     4.4.3     3.20        </span></span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="do">## 6 BioCbooks     https://bioconductor.org/packages/3.20/books           bioc     4.4.3     3.20      </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="do">## &quot;https://packagemanager.posit.co/cran/2024-03-15&quot;</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="co"># インストール元を Posit Package Manager で指定</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;Matrix&quot;</span>, <span class="at">repos =</span> pak<span class="sc">::</span><span class="fu">repo_resolve</span>(<span class="st">&quot;PPM@R-4.4.0&quot;</span>))</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="co"># 継続的に変更する場合（R を終了するまで有効）</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>pak<span class="sc">::</span><span class="fu">repo_add</span>(<span class="at">CRAN =</span> pak<span class="sc">::</span><span class="fu">repo_resolve</span>(<span class="st">&quot;PPM@R-4.4.0&quot;</span>))</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>pak<span class="sc">::</span><span class="fu">repo_get</span>()</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="do">## # A data frame: 6 × 5</span></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="do">##   name          url                                                    type     r_version bioc_version</span></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="do">## * &lt;chr&gt;         &lt;chr&gt;                                                  &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;       </span></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 CRAN          https://packagemanager.posit.co/cran/2024-04-25        cran     *         NA          </span></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 BioCsoft      https://bioconductor.org/packages/3.20/bioc            bioc     4.4.3     3.20        </span></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 BioCann       https://bioconductor.org/packages/3.20/data/annotation bioc     4.4.3     3.20        </span></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a><span class="do">## 4 BioCexp       https://bioconductor.org/packages/3.20/data/experiment bioc     4.4.3     3.20        </span></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a><span class="do">## 5 BioCworkflows https://bioconductor.org/packages/3.20/workflows       bioc     4.4.3     3.20        </span></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a><span class="do">## 6 BioCbooks     https://bioconductor.org/packages/3.20/books           bioc     4.4.3     3.20      </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
