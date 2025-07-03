@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/dataset_whas500.html",
       "/install_old_packages.html",
       "/setting_cran_mirror.html"
     ]
