@@ -4,6 +4,7 @@ project:
 
 website:
   title: "memoRandum"
+  favicon: tinygraphs_mokztk.svg
   navbar:
     background: primary
     left:
