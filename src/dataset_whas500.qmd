@@ -2,7 +2,7 @@
 title: "WHAS (Worcester Heart Attack Study) データセット"
 author: "@mokztk"
 date-format: iso
-date: "2025-07-03"
+date: "2025-07-04"
 format:
   html: 
     fontsize: normal
@@ -145,7 +145,7 @@ UMass Amherst のサイトにあった変数の解説文書 [^3] を基に、**G
 
 | 変数名 | 説明                          | 値の意味                     |
 |:-------|:------------------------------|:-----------------------------|
-| id     | 症例番号                      | 1 - 500 の整数               |
+| id     | 症例番号                      | 1 -- 500 の整数              |
 | gender | 性別                          | 0: 男性、1: 女性             |
 | hr     | 初回の脈拍数                  | 整数（回/分）                |
 | sysbp  | 初回の収縮期血圧              | 整数（mmHg）                 |
@@ -161,7 +161,7 @@ UMass Amherst のサイトにあった変数の解説文書 [^3] を基に、**G
 | year   | コホート開始年                | 1:1997年、2:1999年、3:2001年 |
 | los    | 入院期間                      | 整数（日）                   |
 | dstat  | 退院時の状態                  | 0:生存退院、1:死亡退院       |
-| lenfol | 総観察期間（入院～最終観察）  | 整数（日数）                 |
+| lenfol | 総観察期間（入院～最終観察）  | 整数（日）                   |
 | fstat  | 最終観察時の状態              | 0:生存、1:死亡               |
 
 変数を取捨選択しただけのデータと、内容に応じて型や因子水準を設定したデータを作成します。
@@ -230,8 +230,8 @@ glimpse(data_whas500, width = 60)
 
 上記ファイルのダウンロード：
 
-- 変数選択のみ：[whas500_plain.RDS](../data/whas500_plain.RDS)
-- 因子水準設定済：[whas500_modified.RDS](../data/whas500_modified.RDS)
+- 変数選択のみ：[whas500_plain.RDS](https://github.com/mokztk/memorandum/raw/refs/heads/main/data/whas500_plain.RDS)
+- 因子水準設定済：[whas500_modified.RDS](https://github.com/mokztk/memorandum/raw/refs/heads/main/data/whas500_modified.RDS)
 
 :::{.callout-note}
 ## ライセンスについて
