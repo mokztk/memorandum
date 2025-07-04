@@ -1,29 +1,9 @@
 ---
 title: "WHAS (Worcester Heart Attack Study) データセット"
-author: "@mokztk"
-date-format: iso
-date: "2025-07-04"
-format:
-  html: 
-    fontsize: normal
-    page-layout: full
-    toc: true
-    toc-depth: 3
-    html-math-method: katex
-    fig-format: svg
-    fig-height: 5
-    fig-width: 9
-    self-contained: true
-    number-sections: false
-    code-fold: false
-    code-block-border-left: true
-    code-line-numbers: false
-    code-overflow: wrap
-    highlight-style: atom-one
-    df-print: kable
-categories:
-  - R
-  - dataset
+emoji: "📊"
+type: "tech" # tech: 技術記事 / idea: アイデア
+topics: ["R", "データセット"]
+published: false
 ---
 
 データサイエンスの演習で用いられる、急性心筋梗塞に関する地域コホート研究に由来する WHAS500 (Worcester Heart Attack Study) データセットについて。
@@ -60,36 +40,17 @@ WHAS500 データセットはマサチューセッツ大学アマースト校 UM
 
 筆者はこの中で R しか使えないので、まず Python 版、SAS 版をそれぞれ R で使用できるように読み込みます。
 
-
-::: {.cell}
-
-```{.r .cell-code}
+```r
 # Python 版
-# Gemini に作成してもらった下記 Python コードをもとに reticulate で R に読み込む
-# -----------------------------------------------------------------------------------------------------------
-# import pandas as pd
-# from sksurv.datasets import load_whas500
-#
-# # データをロード
-# X, y = load_whas500()
-#
-# # y (numpy.ndarray) を DataFrame に変換する
-# # y.tolist() は、各レコードをリストとして抽出し、DataFrameの行になります。
-# # y.dtype.names は、構造化配列のフィールド名（'fstat', 'lenfol'など）を提供し、DataFrameの列名になります。
-# y_df = pd.DataFrame(y.tolist(), columns=y.dtype.names)
-#
-# # X (pandas.DataFrame) と y_df (pandas.DataFrame) を結合する
-# # 両者の行数が同じで、かつ順序が対応していることを前提に、axis=1 で結合します。
-# full_data = pd.concat([X, y_df], axis=1)
-# -----------------------------------------------------------------------------------------------------------
+# Gemini に作成してもらった Python コードをもとに reticulate で R に読み込む
 
-# Python 環境に Pandas など頻用パッケージは導入済みとする
+# Python 環境に Pandas など頻用パッケージは導入済みとして、scikit-survival を追加
 pacman::p_load("reticulate")
 reticulate::py_install("scikit-survival")
 
+# WHAS500 データセットを読み込んで、目的変数と説明変数を一つのデータフレームにまとめる
 pd   <- reticulate::import("pandas")
 skds <- reticulate::import("sksurv.datasets")
-# WHAS500 データセットを読み込んで、目的変数と説明変数を一つのデータフレームにまとめる
 whas <- skds$load_whas500()
 y    <- pd$DataFrame(whas[[2]]$tolist(), columns = whas[[2]]$dtype$names)
 whas500_py <- cbind(whas[[1]], y)
@@ -104,17 +65,10 @@ whas500_sas <- haven::read_sas("whas500.sas7bdat", .name_repair = tolower)
 if (!("smoothHR" %in% .packages(all.available = TRUE))) install.packages("smoothHR")
 whas500_r <- smoothHR::whas500
 ```
-:::
-
-
-
 
 3つのデータセットを比較します。
 
-
-::: {.cell}
-
-```{.r .cell-code}
+```r
 pacman::p_load(tidyverse)
 
 # データの行数、変数の数
@@ -125,19 +79,13 @@ tibble(name = paste0("whas500_", c("r", "py", "sas"))) %>%
   )
 ```
 
-::: {.cell-output-display}
-<div class="kable-table">
-
 |name        | rows| cols|
 |:-----------|----:|----:|
 |whas500_r   |  500|   22|
 |whas500_py  |  500|   16|
 |whas500_sas |  500|   19|
 
-</div>
-:::
-
-```{.r .cell-code}
+```r
 # 各データに含まれる変数とデータの型
 tibble(variables = names(whas500_r)) %>%
   mutate(
@@ -146,40 +94,34 @@ tibble(variables = names(whas500_r)) %>%
     Python = sapply(whas500_py , class)[match(variables, names(whas500_py))],
     SAS    = sapply(whas500_sas, class)[match(variables, names(whas500_sas))]
   ) %>%
+  # 削除されている変数には x をつける
   mutate(across(-variables, \(y) if_else(is.na(y), "x", y)))
 ```
 
-::: {.cell-output-display}
-<div class="kable-table">
-
-|variables |R       |Python  |SAS     |
-|:---------|:-------|:-------|:-------|
-|id        |integer |x       |numeric |
-|age       |integer |numeric |numeric |
-|gender    |integer |factor  |numeric |
-|hr        |integer |numeric |numeric |
-|sysbp     |integer |numeric |numeric |
-|diasbp    |integer |numeric |numeric |
-|bmi       |numeric |numeric |numeric |
-|cvd       |integer |factor  |numeric |
-|afb       |integer |factor  |numeric |
-|sho       |integer |factor  |numeric |
-|chf       |integer |factor  |numeric |
-|av3       |integer |factor  |numeric |
-|miord     |integer |factor  |numeric |
-|mitype    |integer |factor  |numeric |
-|year      |integer |x       |numeric |
-|admitdate |factor  |x       |x       |
-|disdate   |factor  |x       |x       |
-|fdate     |factor  |x       |x       |
-|los       |integer |numeric |numeric |
-|dstat     |integer |x       |numeric |
-|lenfol    |integer |numeric |numeric |
-|fstat     |integer |logical |numeric |
-
-</div>
-:::
-:::
+|variables     |R       |Python  |SAS     |
+|:-------------|:-------|:-------|:-------|
+|**id**        |integer |x       |numeric |
+|**age**       |integer |numeric |numeric |
+|**gender**    |integer |factor  |numeric |
+|**hr**        |integer |numeric |numeric |
+|**sysbp**     |integer |numeric |numeric |
+|**diasbp**    |integer |numeric |numeric |
+|**bmi**       |numeric |numeric |numeric |
+|**cvd**       |integer |factor  |numeric |
+|**afb**       |integer |factor  |numeric |
+|**sho**       |integer |factor  |numeric |
+|**chf**       |integer |factor  |numeric |
+|**av3**       |integer |factor  |numeric |
+|**miord**     |integer |factor  |numeric |
+|**mitype**    |integer |factor  |numeric |
+|**year**      |integer |x       |numeric |
+|**admitdate** |factor  |x       |x       |
+|**disdate**   |factor  |x       |x       |
+|**fdate**     |factor  |x       |x       |
+|**los**       |integer |numeric |numeric |
+|**dstat**     |integer |x       |numeric |
+|**lenfol**    |integer |numeric |numeric |
+|**fstat**     |integer |logical |numeric |
 
 
 R 版（あるいは元データ）と比較して、Python 版や SAS 版では生の日付情報（入院日 `admitdate`, 退院日 `disdate`, 転帰日 `fdate`）が削除されています。後述のように、ここから計算される日数情報は別にありますので、昨今の個人情報保護の流れも踏まえて削除して取り扱った方が良さそうです。
@@ -192,12 +134,12 @@ UMass Amherst のサイトにあった変数の解説文書 [^3] を基に、**G
 
 | 変数名 | 説明                          | 値の意味                     |
 |:-------|:------------------------------|:-----------------------------|
-| id     | 症例番号                      | 1 -- 500 の整数              |
+| id     | 症例番号                      | 1 - 500 の整数               |
 | gender | 性別                          | 0: 男性、1: 女性             |
 | hr     | 初回の脈拍数                  | 整数（回/分）                |
 | sysbp  | 初回の収縮期血圧              | 整数（mmHg）                 |
 | diasbp | 初回の拡張期血圧              | 整数（mmHg）                 |
-| bmi    | Body Mass Index               | 実数（kg/m^2^）              |
+| bmi    | Body Mass Index               | 実数（kg/m^2）               |
 | cvd    | 心血管疾患の既往              | 0:なし、1:あり               |
 | afb    | 心房細動の有無                | 0:なし、1:あり               |
 | sho    | 心原性ショックの有無          | 0:なし、1:あり               |
@@ -213,10 +155,7 @@ UMass Amherst のサイトにあった変数の解説文書 [^3] を基に、**G
 
 変数を取捨選択しただけのデータと、内容に応じて型や因子水準を設定したデータを作成します。
 
-
-::: {.cell}
-
-```{.r .cell-code}
+```r
 # 再掲
 whas500_r <- smoothHR::whas500
 
@@ -242,15 +181,10 @@ whas500_modified <-
     across(c(cvd:av3, dstat, fstat), factor)
   )
 ```
-:::
-
 
 ## 編集したデータセットの保存
 
-
-::: {.cell}
-
-```{.r .cell-code}
+```r
 # RDS形式で保存
 saveRDS(whas500_plain   , file = "whas500_plain.RDS")
 saveRDS(whas500_modified, file = "whas500_modified.RDS")
@@ -280,17 +214,13 @@ glimpse(data_whas500, width = 60)
 ## $ lenfol <int> 2178, 2172, 2190, 297, 2131, 1, 2122, 1496,…
 ## $ fstat  <fct> 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0…
 ```
-:::
 
-
-上記ファイルのダウンロード：
+上記ファイルのダウンロード（from GitHub）：
 
 - 変数選択のみ：[whas500_plain.RDS](https://github.com/mokztk/memorandum/raw/refs/heads/main/data/whas500_plain.RDS)
 - 因子水準設定済：[whas500_modified.RDS](https://github.com/mokztk/memorandum/raw/refs/heads/main/data/whas500_modified.RDS)
 
-:::{.callout-note}
-## ライセンスについて
-
+:::message
 このページで配布している `whas500_plain.RDS`, `whas500_modified.RDS` は R パッケージ [smoothHR](https://cran.r-project.org/package=smoothHR) に含まれるデータセットを基にしており、[GNU GPL v3](https://www.gnu.org/licenses/gpl-3.0.html) ライセンスの下で再配布されています。
 :::
 
@@ -298,5 +228,3 @@ glimpse(data_whas500, width = 60)
 [^1]: Hosmer, D. W., Lemeshow, S., & May, S. (2008). Applied Survival Analysis: Regression Modeling of Time to Event Data (2nd ed.). John Wiley & Sons Inc., New York, NY.
 [^2]: WayBack Machine : https://web.archive.org/web/20170114043458/http://www.umass.edu/statdata/statdata/data/
 [^3]: WayBack Machine : https://web.archive.org/web/20170517071528/http://www.umass.edu/statdata/statdata/data/whas500.txt
-
-
