@@ -2,8 +2,8 @@
 title: "WHAS (Worcester Heart Attack Study) データセット"
 emoji: "📊"
 type: "tech" # tech: 技術記事 / idea: アイデア
-topics: ["R", "データセット"]
-published: false
+topics: ["R", "Python", "データセット"]
+published: true
 ---
 
 データサイエンスの演習で用いられる、急性心筋梗塞に関する地域コホート研究に由来する WHAS500 (Worcester Heart Attack Study) データセットについて。
@@ -98,30 +98,30 @@ tibble(variables = names(whas500_r)) %>%
   mutate(across(-variables, \(y) if_else(is.na(y), "x", y)))
 ```
 
-|variables     |R       |Python  |SAS     |
-|:-------------|:-------|:-------|:-------|
-|**id**        |integer |x       |numeric |
-|**age**       |integer |numeric |numeric |
-|**gender**    |integer |factor  |numeric |
-|**hr**        |integer |numeric |numeric |
-|**sysbp**     |integer |numeric |numeric |
-|**diasbp**    |integer |numeric |numeric |
-|**bmi**       |numeric |numeric |numeric |
-|**cvd**       |integer |factor  |numeric |
-|**afb**       |integer |factor  |numeric |
-|**sho**       |integer |factor  |numeric |
-|**chf**       |integer |factor  |numeric |
-|**av3**       |integer |factor  |numeric |
-|**miord**     |integer |factor  |numeric |
-|**mitype**    |integer |factor  |numeric |
-|**year**      |integer |x       |numeric |
-|**admitdate** |factor  |x       |x       |
-|**disdate**   |factor  |x       |x       |
-|**fdate**     |factor  |x       |x       |
-|**los**       |integer |numeric |numeric |
-|**dstat**     |integer |x       |numeric |
-|**lenfol**    |integer |numeric |numeric |
-|**fstat**     |integer |logical |numeric |
+|variables |R       |Python  |SAS     |
+|:---------|:-------|:-------|:-------|
+|id        |integer |x       |numeric |
+|age       |integer |numeric |numeric |
+|gender    |integer |factor  |numeric |
+|hr        |integer |numeric |numeric |
+|sysbp     |integer |numeric |numeric |
+|diasbp    |integer |numeric |numeric |
+|bmi       |numeric |numeric |numeric |
+|cvd       |integer |factor  |numeric |
+|afb       |integer |factor  |numeric |
+|sho       |integer |factor  |numeric |
+|chf       |integer |factor  |numeric |
+|av3       |integer |factor  |numeric |
+|miord     |integer |factor  |numeric |
+|mitype    |integer |factor  |numeric |
+|year      |integer |x       |numeric |
+|admitdate |factor  |x       |x       |
+|disdate   |factor  |x       |x       |
+|fdate     |factor  |x       |x       |
+|los       |integer |numeric |numeric |
+|dstat     |integer |x       |numeric |
+|lenfol    |integer |numeric |numeric |
+|fstat     |integer |logical |numeric |
 
 
 R 版（あるいは元データ）と比較して、Python 版や SAS 版では生の日付情報（入院日 `admitdate`, 退院日 `disdate`, 転帰日 `fdate`）が削除されています。後述のように、ここから計算される日数情報は別にありますので、昨今の個人情報保護の流れも踏まえて削除して取り扱った方が良さそうです。
