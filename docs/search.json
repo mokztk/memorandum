@@ -39,14 +39,28 @@
     "href": "index.html",
     "title": "memoRandum",
     "section": "",
-    "text": "WHAS (Worcester Heart Attack Study) データセット\n\n\n\nR\n\ndataset\n\n\n\n\n\n\n\n2025年7月4日\n\n\n\n\n\n\n\n\n\n\n旧版の R にパッケージをインストールする\n\n\n\nR\n\n設定\n\nmJOHNSNOW\n\n\n\n\n\n\n\n2025年7月1日\n\n\n\n\n\n\n\n\n\n\nCRAN mirror の設定\n\n\n\nR\n\n設定\n\nmJOHNSNOW\n\n\n\n\n\n\n\n2025年6月30日\n\n\n\n\n\n\n一致なし"
+    "text": "WHAS (Worcester Heart Attack Study) データセット\n\n\n\nR\n\n\ndataset\n\n\nZenn\n\n\n\n\n\n\n\n2025年7月4日\n\n\n\n\n\n\n\n\n\n\n\n旧版の R にパッケージをインストールする\n\n\n\nR\n\n\n設定\n\n\nmJOHNSNOW\n\n\nZenn\n\n\n\n\n\n\n\n2025年7月1日\n\n\n\n\n\n\n\n\n\n\n\nCRAN mirror の設定\n\n\n\nR\n\n\n設定\n\n\nmJOHNSNOW\n\n\nZenn\n\n\n\n\n\n\n\n2025年6月30日\n\n\n\n\n\n\n\n\n一致なし"
   },
   {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About this site",
     "section": "",
-    "text": "R を中心とする個人的なメモです。\nZenn の原稿その他をストックしています。"
+    "text": "R を中心とする個人的なメモです。\nZenn の原稿その他をストックしています。\n\n\nGithub: https://github.com/mokztk\n\ncudpalette\nカラーユニバーサルデザイン（CUD）推奨色とJIS安全色のパレットを使うための自作パッケージ\nRStudio_docker\nrocker/tidyverse ベースに日本語化、カスタマイズした docker image\n\nX/twitter: @mokztk\nMastodon: @mokztk@mstdn.jp"
+  },
+  {
+    "objectID": "about.html#自己紹介",
+    "href": "about.html#自己紹介",
+    "title": "About this site",
+    "section": "自己紹介",
+    "text": "自己紹介\n\n\n\nicon\n\n\n\n医療系データ解析がメインです\nR歴：\n\n初めて使ったバージョンは確か 2.11.1\n初めて触れた参考書：Rによる医療統計学（丸善, 2007） 学会発表のために使える解析、グラフ作成ソフトを探していて出会いました\nR力はR歴に比例しません…\nプラットフォーム：Windows, RStudio Server (on docker), Positron\nアイコン： tinygraphs でR関係っぽく"
+  },
+  {
+    "objectID": "about.html#sns-etc.",
+    "href": "about.html#sns-etc.",
+    "title": "About this site",
+    "section": "SNS etc.",
+    "text": "SNS etc.\n\nGithub: https://github.com/mokztk\n\nmokztk/cudpalette カラーユニバーサルデザイン（CUD）推奨色とJIS安全色のパレットを使うための自作パッケージ\nmokztk/RStudio_docker rocker/tidyverse ベースに日本語化、カスタマイズした docker image\n\nX/twitter: @mokztk\nMastodon: @mokztk@mstdn.jp"
   },
   {
     "objectID": "dataset_whas500.html",

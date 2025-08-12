@@ -25,6 +25,7 @@ categories:
   - R
   - 設定
   - mJOHNSNOW
+  - Zenn
 ---
 
 昨年から参加しているオンラインスクール [mJOHNSNOW](https://mmedici.co.jp/mjohnsnow) の R に関する Slack チャットで CRAN mirror の設定に起因するトラブルをよく見るので、設定方法を確認します。
