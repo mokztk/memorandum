@@ -24,6 +24,7 @@ format:
 categories:
   - R
   - dataset
+  - Zenn
 ---
 
 データサイエンスの演習で用いられる、急性心筋梗塞に関する地域コホート研究に由来する WHAS500 (Worcester Heart Attack Study) データセットについて。

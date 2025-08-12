@@ -25,7 +25,12 @@ categories:
   - R
   - 設定
   - mJOHNSNOW
+  - Zenn
 ---
+
+
+
+
 
 昨年から参加しているオンラインスクール [mJOHNSNOW](https://mmedici.co.jp/mjohnsnow) の R に関する Slack チャットで CRAN mirror の設定に起因するトラブルをよく見るので、設定方法を確認します。
 
@@ -79,12 +84,16 @@ Posit Package Manager を使った設定については稿を改めます。
 `install.packages()` のオプション `repos =` に直接インストール元を指定することができます。
 
 
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
 install.packages("MASS", repos = "cloud.r-project.org")
 ```
 :::
+
+
 
 
 ### 継続的にインストール元を変更する場合
@@ -99,11 +108,11 @@ RStudio 以外でも有効にするためには、`.Rprofile` というファイ
 `.Rprofile` の場所は R のコンソールで `Sys.getenv("R_USER")` を実行して表示されたフォルダ（ディレクトリ）です。最近の Windows では、"C:/Users/*****/OneDrive/ドキュメント" のような OneDrive 上にあるかもしれません。ファイルがなければ、新しく作る必要があります。
 
 
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
 options(repos = c(CRAN = "https://cloud.r-project.org"))
 ```
 :::
-
-
