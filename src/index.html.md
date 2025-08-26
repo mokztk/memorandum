@@ -17,6 +17,7 @@ format:
   html: 
     fontsize: normal
     page-layout: full
+    self-contained: true
 ---
 
 
