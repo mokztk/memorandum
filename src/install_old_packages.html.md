@@ -28,10 +28,6 @@ categories:
   - Zenn
 ---
 
-
-
-
-
 パッケージを追加しようとしたとき、新しいバージョンの R を求められることがあります。R 本体の更新ができないとき、パッケージの最新版でなくともよい場合の回避策のメモです。
 
 ## 要旨
@@ -66,8 +62,6 @@ https://cran.r-project.org/doc/manuals/r-patched/R-admin.html#Installing-package
 まず、`pak::pkg_history()` を使って `Matrix` のこれまでのリリース情報から要求される R のバージョンを見てみます。
 
 
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -97,6 +91,7 @@ pkg_history(pkg = "Matrix") %>%
 
 |Package |Version |Date       |R dependency |
 |:-------|:-------|:----------|:------------|
+|Matrix  |1.7-4   |2025-08-27 |>= 4.4       |
 |Matrix  |1.7-3   |2025-03-05 |>= 4.4       |
 |Matrix  |1.7-2   |2025-01-20 |>= 4.4       |
 |Matrix  |1.7-1   |2024-10-17 |>= 4.4.0     |
@@ -106,13 +101,10 @@ pkg_history(pkg = "Matrix") %>%
 |Matrix  |1.6-3   |2023-11-13 |>= 3.5.0     |
 |Matrix  |1.6-2   |2023-11-03 |>= 3.5.0     |
 |Matrix  |1.6-1.1 |2023-09-08 |>= 3.5.0     |
-|Matrix  |1.6-1   |2023-08-11 |>= 3.5.0     |
 
 </div>
 :::
 :::
-
-
 
 
 **バージョン 1.6-5 （2024-01-06 公開）ならば、R 4.3系でも使用できそうです。**
@@ -132,8 +124,6 @@ CRAN からは過去のバージョンのパッケージも .zip 形式や .tar.
 上記より、`Matrix_1.6-5.zip` (Windows) または `Matrix_1.6-5.tgz` (macOS) を working directory にダウンロードして
 
 
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -142,11 +132,7 @@ install.packages("Matrix_1.6-5.zip", repos = NULL)
 :::
 
 
-
-
 とするか、上記アーカイブのアドレスを使って
-
-
 
 
 ::: {.cell}
@@ -157,15 +143,11 @@ install.packages("https://cloud.r-project.org/bin/windows/contrib/4.3/Matrix_1.6
 :::
 
 
-
-
 とすることでインストールが可能です。`repos = NULL` は省略しても補完されますが、明示的に指定したほうが確実です。
 
 ### パッケージのバージョンを指定してインストール
 
 上記のアーカイブには、対象の R のバージョンにより存在しないパッケージのバージョンもあります。`remotes::install_version()` のようにバージョンを指定してインストールできる命令を使用すると、もう少し柔軟なインストールが可能です。
-
-
 
 
 ::: {.cell}
@@ -175,8 +157,6 @@ install.packages("https://cloud.r-project.org/bin/windows/contrib/4.3/Matrix_1.6
 remotes::install_version(package = "Matrix", version = "1.6-5", repos = "cloud.r-project.org")
 ```
 :::
-
-
 
 
 ### Posit Package Manager のスナップショットからインストール
@@ -199,8 +179,6 @@ Posit（旧 RStudio）社が運営する、日々の CRAN ライブラリーの�
 この URL を `install.packages()` の `repos =` に指定することで、**関連パッケージを含めて  `Matrix 1.6-5` が最新バージョンであった 2024-03-15 時点のバージョンに揃えてインストールできる**ようになります。
 
 
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -209,15 +187,11 @@ install.packages("Matrix", repos = "https://packagemanager.posit.co/cran/2024-03
 :::
 
 
-
-
 ## pak パッケージの活用
 
 `pak` は CRAN だけでなく、GitHub や BioConductor といった別のサイトで配布されているパッケージや、ダウンロードしたファイルからも同じ命令でパッケージのインストールができる多機能なパッケージです。
 
 基本的な使い方は
-
-
 
 
 ::: {.cell}
@@ -235,11 +209,7 @@ pak::pkg_install("package_name")
 :::
 
 
-
-
 で、`package_name` の部分の書き方により CRAN 以外のサイトや最新版以外のバージョンをインストールすることも可能です。
-
-
 
 
 ::: {.cell}
@@ -260,11 +230,7 @@ pak::pak("local::Matrix_1.6-5.zip")
 :::
 
 
-
-
 インストール元（レポジトリ）を検索、設定することもできます。
-
-
 
 
 ::: {.cell}
@@ -306,3 +272,5 @@ pak::repo_get()
 ## 6 BioCbooks     https://bioconductor.org/packages/3.20/books           bioc     4.4.3     3.20      
 ```
 :::
+
+
