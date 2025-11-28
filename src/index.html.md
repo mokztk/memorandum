@@ -20,9 +20,6 @@ format:
     self-contained: true
 ---
 
-
-
-
 ::::{.text-center}
 ![](../images/memoRandum_header.png){.d-none .d-lg-inline}
 ::::
